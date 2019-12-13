@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.sales.creditshelf.exception.DataNotFoundException;
 import com.company.sales.creditshelf.exception.HostConnectException;
 import com.company.sales.creditshelf.service.SaleService;
 
@@ -31,6 +32,10 @@ public class SalesController {
 		catch (HostConnectException  e) {
 			result.put("response", e.getMessage());
 			return new ResponseEntity<Map<String,Object>>(result.toMap(),HttpStatus.GATEWAY_TIMEOUT);
+		}
+		catch (DataNotFoundException  e) {
+			result.put("response", e.getMessage());
+			return new ResponseEntity<Map<String,Object>>(result.toMap(),HttpStatus.NOT_FOUND);
 		}
 		catch (Exception  e) {
 			result.put("response", e.getMessage());

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.company.sales.creditshelf.exception.DataNotFoundException;
 import com.company.sales.creditshelf.exception.HostConnectException;
 import com.company.sales.creditshelf.model.Sale;
 import com.company.sales.creditshelf.repository.SaleRepository;
@@ -26,7 +27,8 @@ public class SaleService {
 		List<Sale> result = saleRepository.findByCompanyName(companyName);
 		JSONObject saleReport = new JSONObject();
 		if(result.isEmpty())
-			return saleReport.put("response", "company name is not valid");
+			throw new DataNotFoundException("Data not found into the database");
+			//return saleReport.put("response", "No data found");
 
 		for(int i = 0;i<result.size();i++) {
 			Sale sale = result.get(i);

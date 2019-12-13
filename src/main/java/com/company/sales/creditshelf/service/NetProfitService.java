@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.company.sales.creditshelf.dao.CompanyDao;
+import com.company.sales.creditshelf.exception.DataNotFoundException;
 import com.company.sales.creditshelf.exception.HostConnectException;
 import com.company.sales.creditshelf.model.Sale;
 import com.company.sales.creditshelf.repository.SaleRepository;
@@ -43,7 +44,7 @@ public class NetProfitService {
 		JSONObject netProfitReport = new JSONObject();
 		List<Sale> queryResult = saleRepository.findByCompanyName(companyName);
 		if(queryResult.isEmpty())
-			return netProfitReport.put("response", "company name is not valid");
+			throw new DataNotFoundException("Data not found into the database");
 		String startDayAndMonth = "01/01";
 		String endDayAndMonth = "12/31";
 

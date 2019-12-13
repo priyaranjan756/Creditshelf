@@ -12,6 +12,6 @@ import com.company.sales.creditshelf.model.AcmeCorporationModel;
 @Repository
 public interface AcmeCorporationRepository extends JpaRepository<AcmeCorporationModel, Integer>{
 	
-	@Query(value = "select * from acme_corporation where product_id = ?1",nativeQuery = true)
+	@Query(value = "select * from acme_corporation where id = ?1",nativeQuery = true)
 	AcmeCorporationModel findByProductId(int productId);
 }

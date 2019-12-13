@@ -19,7 +19,7 @@ public class OlivandersShopModel  implements Serializable{
 	@Id
 	@Column(nullable = false,name ="id" )
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int product_id;
+	private int id;
 	
 	@Column(nullable = false,name ="name" )
 	private String name;

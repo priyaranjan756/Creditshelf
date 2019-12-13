@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.company.sales.creditshelf.exception.DataNotFoundException;
 import com.company.sales.creditshelf.exception.HostConnectException;
 import com.company.sales.creditshelf.model.Sale;
 import com.company.sales.creditshelf.repository.SaleRepository;
@@ -30,7 +31,7 @@ public class RevenueService {
 		JSONObject revenueReport = new JSONObject();
 		List<Sale> queryResult = saleRepository.findByCompanyName(companyName);
 		if(queryResult.isEmpty())
-			return revenueReport.put("response", "company name is not valid");
+			throw new DataNotFoundException("Data not found into the database");
 		String startDayAndMonth = "01/01";
 		String endDayAndMonth = "12/31";
 		String startDate = startDayAndMonth.concat("/").concat(String.valueOf(year));
